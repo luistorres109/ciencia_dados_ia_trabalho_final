@@ -4,7 +4,7 @@ import re
 
 #---------------------------------------------------------------------------------------------------------
 # Função que extrai dados dos PDFs
-def get_detalhes_editais(caminho_arquivo, pdf=None):
+def get_detalhes_editais(caminho_arquivo):
     # Lê o arquivo
     raw = parser.from_file(caminho_arquivo)
     dados = raw['content']
@@ -72,7 +72,6 @@ def get_detalhes_editais(caminho_arquivo, pdf=None):
         detalhes_editais['data'] = None
     detalhes_editais['edital'] = edital
     detalhes_editais['secretaria'] = secretaria
-    detalhes_editais['pdf'] = pdf
 
     return detalhes_editais
 
