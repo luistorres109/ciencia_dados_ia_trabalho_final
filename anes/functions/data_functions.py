@@ -1,6 +1,5 @@
-from functions.capture_data import detalhes_editais as de
-from functions.repeated_code import funcoes as fc
-from functions.store_data import commit as cm
+from functions import detalhes_editais as de
+from functions import repeated_code as fc
 from datetime import date
 import pandas as pd
 import datetime
@@ -94,7 +93,6 @@ def insert_data(tabela, caminho_arquivo, pdf, df):
                 print("\n---------------------\nTabela Criada e Dados Adicionados!")
             # Fecha o arquivo
             arquivo.close()
-        cm.commit(caminho_arquivo, pdf, df)
     else:
         print('\n---------------------\nEdital Inválido!')
 
