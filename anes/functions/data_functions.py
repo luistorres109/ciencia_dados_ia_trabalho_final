@@ -7,7 +7,7 @@ import csv
 
 #---------------------------------------------------------------------------------------------------------
 # Insere os dados na tabela e no Banco de Dados
-def insert_data(tabela, caminho_arquivo, pdf, df):
+def insert_data(tabela, caminho_arquivo, df):
     # Pega os valores dos editais
     detalhes_editais = de.get_detalhes_editais(caminho_arquivo)
 
