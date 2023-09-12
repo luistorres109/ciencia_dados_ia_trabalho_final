@@ -99,36 +99,6 @@ def insert_data(tabela, caminho_arquivo, pdf, df):
         print('\n---------------------\nEdital Inválido!')
 
 #---------------------------------------------------------------------------------------------------------
-# Função que remove editais homologados ou invalidos
-def del_data(tabela):
-    try:
-        # Ler a tabela e converter coluna 'Data' para datetime
-        df = pd.read_csv(tabela, delimiter=';', parse_dates=['Data']).reset_index(drop=True)
-
-        # Filtrar linhas com datas homologadas
-        today = date.today()
-
-        # Sub-função que confere linha por linha se ela é valida ou não
-        def is_valid_date(row):
-            data = row['Data'].date()
-            if data >= today:
-                return True
-            elif data < today and row['Modalidade'] in ['Inexigibilidade', 'Dispensa por Justificativa', 'Dispensa De Licitação']:
-                if data.year == today.year:
-                    return True
-            return False
-
-        # Remover dados
-        df = df[df.apply(is_valid_date, axis=1)]
-        df = df.drop_duplicates(subset=['Data', 'Horario', 'Edital', 'Objeto'])
-
-        # Salvar a tabela modificada
-        df.to_csv(tabela, index=False, encoding='utf-8-sig', sep=";")
-        print("\n---------------------\nDatas deletadas!")
-    except:
-        print("\n---------------------\nErro ao processar o arquivo!")
-
-#---------------------------------------------------------------------------------------------------------
 # Função para por as datas em Ordem Cronológica
 def order_dates(tabela):
     # Listas vázias
