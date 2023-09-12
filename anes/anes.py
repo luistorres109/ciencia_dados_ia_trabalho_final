@@ -20,9 +20,8 @@ TRANSPARENCIA = os.getenv("TRANSPARENCIA")
 
 #---------------------------------------------------------------------------------------------------------
 # Declaração de variáveis e listas
-periodo_atual = "01/05/2023 - 01/08/2023"            # Periodo do início do ano ao dia de hoje, que será usado para extrair os editais DL e de Inexigibilidade
-data_de_abertura = None                              # Variável global para ser usada num escopo específico
-url = "https://transparencia.e-publica.net/epublica-portal/#/chapeco/portal/compras/licitacaoTable"    # Link do site da prefeitura
+periodo_atual = "01/05/2023 - 01/08/2023"                           # Periodo do início do ano ao dia de hoje, que será usado para extrair os editais DL e de Inexigibilidade
+url = TRANSPARENCIA + "/#/chapeco/portal/compras/licitacaoTable"    # Link do site da prefeitura
 driver = webd1.Chrome(executable_path="C:/Users/Desenvolvimento/.wdm/drivers/chromedriver/win64/115.0.5790.111/chromedriver.exe")
 driver.get(url)
 time.sleep(5)
