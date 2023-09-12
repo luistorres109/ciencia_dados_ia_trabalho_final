@@ -1,4 +1,4 @@
-from functions.store_data import data_functions as df # Biblioteca local
+from functions import data_functions as df # Biblioteca local
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.select import Select
 from functions.repeated_code import funcoes as fc
