@@ -205,7 +205,7 @@ for nome_do_edital in nomes_dos_editais:
         arquivo.close()
 
         # Insere os dados na Tabela e no Banco de Dados
-        df.insert_data(FOLDER_PATH + "editais_dados_2.csv", caminho_arquivo, pdf, df1) # Insere os dados numa tabela CSV
+        df.insert_data(FOLDER_PATH + "editais_dados.csv", caminho_arquivo, pdf, df1) # Insere os dados numa tabela CSV
     except:
         try:
             # Deleta os arquivos em caso de erro
@@ -219,4 +219,4 @@ for nome_do_edital in nomes_dos_editais:
         print("\n---------------------\nArquivo Inexistente!")
 
 # Ordenar datas
-df.order_dates(FOLDER_PATH + "editais_dados_2.csv")
+df.order_dates(FOLDER_PATH + "editais_dados.csv")
