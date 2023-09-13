@@ -1,9 +1,9 @@
 from functions import data_functions as df # Biblioteca local
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.select import Select
-from functions.repeated_code import funcoes as fc
 from selenium.webdriver.common.by import By
 from seleniumwire import webdriver as webd2
+from functions import repeated_code as fc
 from selenium import webdriver as webd1
 from bs4 import BeautifulSoup
 import pandas as pd
