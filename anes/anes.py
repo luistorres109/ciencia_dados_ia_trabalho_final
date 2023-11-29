@@ -18,7 +18,6 @@ dotenv.load_dotenv(dotenv.find_dotenv('.env'), override=True)  # Pega as variáv
 FOLDER_PATH = os.getenv("FOLDER_PATH")
 TRANSPARENCIA = os.getenv("TRANSPARENCIA")
 
-# alteração
 #---------------------------------------------------------------------------------------------------------
 # Declaração de variáveis e listas
 periodo_atual = "01/05/2023 - 01/08/2023"                           # Periodo do início do ano ao dia de hoje, que será usado para extrair os editais DL e de Inexigibilidade
