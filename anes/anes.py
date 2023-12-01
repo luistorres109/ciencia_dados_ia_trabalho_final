@@ -1,5 +1,8 @@
+from selenium.webdriver.support import expected_conditions as EC
 from functions import data_functions as df # Biblioteca local
 from selenium.common.exceptions import NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
 from seleniumwire import webdriver as webd2
@@ -14,15 +17,15 @@ import os
 import re
 
 dotenv.load_dotenv(dotenv.find_dotenv('.env'), override=True)  # Pega as variáveis de ambiente
-
 FOLDER_PATH = os.getenv("FOLDER_PATH")
 TRANSPARENCIA = os.getenv("TRANSPARENCIA")
 
 #---------------------------------------------------------------------------------------------------------
 # Declaração de variáveis e listas
 periodo_atual = "01/05/2023 - 01/08/2023"                           # Periodo do início do ano ao dia de hoje, que será usado para extrair os editais DL e de Inexigibilidade
-url = TRANSPARENCIA + "/#/chapeco/portal/compras/licitacaoTable"    # Link do site da prefeitura
-driver = webd1.Chrome(executable_path="C:/Users/Desenvolvimento/.wdm/drivers/chromedriver/win64/115.0.5790.111/chromedriver.exe")
+url = TRANSPARENCIA + "#/chapeco/portal/compras/licitacaoTable"
+driver_path = ChromeDriverManager().install()
+driver = webd1.Chrome(executable_path=driver_path)
 driver.get(url)
 time.sleep(5)
 links_dos_editais = []
@@ -33,17 +36,20 @@ tabela_paginas = []
 # Raspagem dos editais Homologados
 
 # Deixa o texto "Homologado" visível
-expor_texto = driver.find_element(By.XPATH, "/html/body/div[1]/div/portal-shell/section/div/div[1]/div/div/div/div[2]/div/div[1]/div/div[1]/div/div/div/div/div/div/div[4]/div/div[2]/div/div/div/div/a/div/b")
-expor_texto.click()
-time.sleep(1)
+wait = WebDriverWait(driver, 20)
+elemento = wait.until(EC.presence_of_element_located((By.XPATH, "//*[text()='Situação']/../../../div/div/div/div/div")))
+elemento.click()
+time.sleep(5)
 
 # Achar a tag "Select" que contem a opção "Homologado"
-achar_select = driver.find_element(By.XPATH, "//*[text()='Situação']/../../../div[@class='filtro-espacamento col-xs-12 col-sm-8']/div/div/div/select")
+achar_select = driver.find_element(
+    By.XPATH, "//*[text()='Situação']/../../../div[@class='filtro-espacamento col-xs-12 col-sm-8']/div/div/div/select")
 select_object = Select(achar_select)
 time.sleep(1)
 
 # Encontrar o elemento para seleção ("Homologado")
-element_for_select = driver.find_element(By.XPATH, "//*[@id='advancedSearchModal']/div/div/div/div/div/div[4]/div/div[2]/div/div/div/div/div/ul/li[7]")
+element_for_select = driver.find_element(
+    By.XPATH, "//*[@id='advancedSearchModal']/div/div/div/div/div/div[4]/div/div[2]/div/div/div/div/div/ul/li[7]")
 time.sleep(1)
 
 # Clica no elemento para seleção
