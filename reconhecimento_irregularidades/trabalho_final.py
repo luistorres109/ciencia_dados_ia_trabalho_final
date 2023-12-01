@@ -57,4 +57,4 @@ df = df.loc[df['Desvio'] >= 0]
 # Visualizar as licitações irregulares
 print("Dataframe com os editais (SUPOSTAMENTE) irregulares:")
 print(df)
-print(f"\nE o numero total dessas licitacoes eh: {df[df.columns[0]].count()}")
+print(f"\nO numero total dessas licitacoes eh: {df[df.columns[0]].count()}")
