@@ -1,5 +1,5 @@
-# AVISO LEGAL
-# Isto se trata de um trabalho acadêmico e não está sendo feita nenhuma acusação de fato se há ilegalidade ou não nas licitações
+# AVISO LEGAL!!!
+# Isto se trata de um trabalho acadêmico e não está sendo feita nenhuma acusação de fato se há alguma ilegalidade ou não nas licitações
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
