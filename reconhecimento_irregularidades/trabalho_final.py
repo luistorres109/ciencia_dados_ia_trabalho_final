@@ -1,3 +1,5 @@
+# AVISO LEGAL
+# Isto se trata de um trabalho acadêmico e não está sendo feita nenhuma acusação de fato se há ilegalidade ou não nas licitações
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
@@ -56,5 +58,3 @@ df = df.loc[df['Desvio'] >= 0]
 print("Dataframe com os editais (SUPOSTAMENTE) irregulares:")
 print(df)
 print(f"\nE o numero total dessas licitacoes eh: {df[df.columns[0]].count()}")
-
-# Lembrando que isto se trata de um trabalho acadêmico e não está sendo feita nenhuma acusação de fato se há ilegalidade ou não
