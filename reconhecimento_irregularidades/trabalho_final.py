@@ -46,12 +46,15 @@ df['Montante_Pred'] = rf_model.predict(df_features_encoded)
 df['Desvio'] = df['Montante'] - df['Montante_Pred']
 
 # Definição de um limiar para identificar desvios significativos
-limiar_desvio = 100000
+limiar_desvio = 1000000
 
 # Filtrar licitações com desvios significativos
-licitacoes_irregulares = df[abs(df['Desvio']) > limiar_desvio]
+df = df[abs(df['Desvio']) > limiar_desvio].drop(['Data', 'Horario', 'Local', 'Modalidade', 'Forma julgamento', 'Unidade gestora', 'Secretária', 'Objeto', 'Tipo', 'Link da Página'], axis=1)
+df = df.loc[df['Desvio'] >= 0]
 
 # Visualizar as licitações irregulares
-print(licitacoes_irregulares)
+print("Dataframe com os editais (SUPOSTAMENTE) irregulares:")
+print(df)
+print(f"\nE o numero total dessas licitacoes eh: {df[df.columns[0]].count()}")
 
 # Lembrando que isto se trata de um trabalho acadêmico e não está sendo feita nenhuma acusação de fato se há ilegalidade ou não
