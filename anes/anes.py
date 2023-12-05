@@ -22,7 +22,8 @@ TRANSPARENCIA = os.getenv("TRANSPARENCIA")
 
 #---------------------------------------------------------------------------------------------------------
 # Declaração de variáveis e listas
-periodo_atual = "01/05/2023 - 01/08/2023"                           # Periodo do início do ano ao dia de hoje, que será usado para extrair os editais DL e de Inexigibilidade
+data_1 = "01/05/2023"
+data_2 = "01/08/2023"
 url = TRANSPARENCIA + "#/chapeco/portal/compras/licitacaoTable"
 driver_path = ChromeDriverManager().install()
 driver = webd1.Chrome(executable_path=driver_path)
@@ -49,7 +50,7 @@ time.sleep(1)
 
 # Encontrar o elemento para seleção ("Homologado")
 element_for_select = driver.find_element(
-    By.XPATH, "//*[@id='advancedSearchModal']/div/div/div/div/div/div[4]/div/div[2]/div/div/div/div/div/ul/li[7]")
+    By.XPATH, "//*[@id='advancedSearchModal']/div/div/div/div/div/div[4]/div/div[2]/div/div/div/div/div/ul/li[contains(text(), 'Homologado')]")
 time.sleep(1)
 
 # Clica no elemento para seleção
@@ -59,26 +60,40 @@ time.sleep(1)
 # Isola as "unused" variáveis
 _ = select_object
 
-# Clica em "Consultar"
-consultar = driver.find_element(By.XPATH, "//div[@class='row epublica-search-row epublica-search-row-group']/div/div/button[@class='btn-filtrar col-xs-12 col-sm-4 epublica-portal-search-button pull-right']")
-consultar.click()
+# Pegar os editais do periodo "01/05/2023 - 01/08/2023"
+wait = WebDriverWait(driver, 20)
+periodo = wait.until(EC.presence_of_element_located(
+    (By.XPATH, "//*[text()='Período']/../../../div[@class='filtro-espacamento col-xs-12 col-sm-8']/div/div/input")))
+periodo.click()
+primeira_data = wait.until(EC.presence_of_element_located(
+    (By.XPATH, "/html/body/div[4]/div[1]/div[1]/input")))
+primeira_data.click()
 time.sleep(5)
-
-# Encontra o botão "Próxima" para extrair mais links
-proxima = driver.find_element(By.XPATH, "//*[text()='Próxima']")
-
-# Pegar os editais do periodo "01/07/2023 - 01/08/2023"
-periodo = driver.find_element(By.XPATH, "/html/body/div[1]/div/portal-shell/section/div/div[1]/div/div/div/div[2]/div/div[1]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/div/div/input")
-periodo.clear()
-time.sleep(1)
-periodo.send_keys(periodo_atual)
-time.sleep(1)
-aplicar = driver.find_element(By.XPATH, "/html/body/div[4]/div[3]/div/button[1]")    # Acha o botão "Aplicar"
-aplicar.click()                                                                      # Clica no botão para selecionar o periodo específicado
+primeira_data.clear()
+time.sleep(5)
+primeira_data.send_keys(data_1)
 time.sleep(1)
 
-# Consulta os editais filtrados
-consultar = driver.find_element(By.XPATH, "//div[@class='row epublica-search-row epublica-search-row-group']/div/div/button[@class='btn-filtrar col-xs-12 col-sm-4 epublica-portal-search-button pull-right']")
+# Seleciona a data atual
+wait = WebDriverWait(driver, 20)
+segunda_data = wait.until(EC.presence_of_element_located(
+    (By.XPATH, "/html/body/div[4]/div[2]/div[1]/input")))
+segunda_data.click()
+time.sleep(5)
+segunda_data.clear()
+time.sleep(5)
+segunda_data.send_keys(data_2)
+time.sleep(1)
+
+# Clica no botão "Aplicar" para selecionar o período especificado
+aplicar = driver.find_element(
+    By.XPATH, "/html/body/div[4]/div[3]/div/button[1]")
+aplicar.click()
+time.sleep(1)
+
+# Clica em "Consultar"
+consultar = driver.find_element(
+    By.XPATH, "//div[@class='row epublica-search-row epublica-search-row-group']/div/div/button[@class='btn-filtrar col-xs-12 col-sm-4 epublica-portal-search-button pull-right']")
 consultar.click()
 time.sleep(5)
 
@@ -103,13 +118,15 @@ while True:
         element.click()
     except:
         break
+    # Encontra o botão "Próxima" para extrair mais links
+
 driver.close()
 time.sleep(5)
 
 for url, modalidade in links_dos_editais:
     try:
         # Usa o seleniumwire, poís extrairá os nomes dos Editais por uma XHR
-        driver_1 = webd2.Chrome(executable_path="C:/Users/Desenvolvimento/.wdm/drivers/chromedriver/win64/115.0.5790.111/chromedriver.exe")
+        driver_1 = webd2.Chrome(executable_path=driver_path)
         driver_1.get(url)
         time.sleep(5)
 
