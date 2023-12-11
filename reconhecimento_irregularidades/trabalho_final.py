@@ -32,8 +32,8 @@ df_encoded = encoder.fit_transform(df_features[categorical_cols])
 # Obter os nomes das colunas codificadas
 encoded_columns = [f"{col}_{val}" for col, values in zip(categorical_cols, encoder.categories_) for val in values]
 
-# Adicionar as colunas codificadas ao conjunto de dados
-df_features_encoded = pd.concat([df_features.drop(categorical_cols, axis=1), pd.DataFrame(df_encoded, columns=encoded_columns)], axis=1)
+# Criado DF com as colunas codificadas
+df_features_encoded = pd.DataFrame(df_encoded, columns=encoded_columns)
 
 # Inicializar o modelo Random Forest
 rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
