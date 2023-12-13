@@ -8,7 +8,7 @@ import pandas as pd
 import dotenv
 import os
 
-# Avaliar os modelos
+# Função para avaliar modelo
 def evaluate_model(y_true, y_pred):
     mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
@@ -58,7 +58,7 @@ rf_model.fit(X_train, y_train)
 y_val_pred = rf_model.predict(X_val)
 y_test_pred = rf_model.predict(X_test)
 
-# Avaliar modelo
+# Avaliar o modelo
 test_rf_metrics_test = evaluate_model(y_test, y_test_pred)
 val_rf_metrics_val = evaluate_model(y_val, y_val_pred)
 
