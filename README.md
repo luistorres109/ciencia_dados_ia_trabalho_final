@@ -4,7 +4,7 @@ Trabalho final das disciplinas de **_Inteligência Artificial_** (**IA**) e de *
 
 ## 📚 Descrição
 
-Análise de base de dados com ferramentas de ciência de dados, pré-processamento, construção de modelos e apresentação dos insights extraídos.
+Análise de base de dados com ferramentas de ciência de dados, pré-processamento, construção de modelos e apresentação dos *insights* extraídos.
 
 ## 🧠 Objetivo
 
